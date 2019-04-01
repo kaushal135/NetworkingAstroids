@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<GameObject uuid="1eede7d3-5dc1-4209-9548-f5ec0a8249a7" name="player">
+	<Components>
+		<Component class="Transform">
+			<Position x="0" y="0"/>
+			<Rotation a="0"/>
+			<Scale x="1" y="1"/>
+		</Component>	
+		<Component class="RainDrop">
+			<TextureUID uuid="69612f00-9d8c-4c11-8bc5-5b992b050597" />
+			<MinSpeed x="0" y="0"/>
+			<MaxSpeed x="100" y="100"/>
+		</Component>	
+	</Components>
+</GameObject>
