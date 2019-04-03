@@ -33,7 +33,7 @@
 			<Component class="Transform">
 				<Position x="400" y="-300"/>
 				<Rotation a="0"/>
-				<Scale x="1" y="1"/>
+				<Scale x="3.2" y="3.2"/>
 			</Component>	
 			<Component class="Background">
 				<TextureUID uuid="577177e0-c86a-45e5-afc3-b16fb44fd265" />
