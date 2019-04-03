@@ -14,5 +14,10 @@ public:
 
 	void writeCreate(RakNet::BitStream & bs) const override;
 	void readCreate(RakNet::BitStream & bs) override;
+
+private:
+	sf::Vector2f speed;
+	sf::Vector2f minSpeed;
+	sf::Vector2f maxSpeed;
 };
 

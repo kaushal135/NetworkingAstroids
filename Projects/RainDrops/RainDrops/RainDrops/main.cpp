@@ -4,6 +4,7 @@
 #include "RainDropFactory.h"
 #include "RainDrop.h"
 #include "InputController.h"
+#include "Player.h"
 
 int main()
 {
@@ -11,6 +12,7 @@ int main()
 	REGISTER_DYNAMIC_CLASS(RainDropFactory);
     REGISTER_DYNAMIC_CLASS(RainDrop);
     REGISTER_DYNAMIC_CLASS(InputController);
+	REGISTER_DYNAMIC_CLASS(Player);
 	
 	GameEngine::Instance().initialize();
 

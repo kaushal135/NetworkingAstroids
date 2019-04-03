@@ -5,28 +5,13 @@
 	<!-- Texture Asset -->	
 	<Asset>Assets/Raindrop.png</Asset>
 	<Asset>Assets/blue_background.png</Asset>
-	<Asset>Assets/player.png</Asset>
+	<!-- <Asset>Assets/player.png</Asset>-->
 	
 	<!-- Prefab Example!! -->	
 	<Asset>Assets/RaindropPrefab.xml</Asset>
 	<!--<Asset>Assets/playerPrefab.xml<Asset> -->
 </Assets>
 <GameObjects>
-
-	<!--
-	<GameObject uuid="7f95b98e-d0ad-4f26-a885-db6121ef0a67" name="Background">
-		<Components>
-			<Component class="Transform">
-				<Position x="400" y="-300"/>
-				<Rotation a="0"/>
-				<Scale x="0.5" y="0.5"/>
-			</Component>	
-			<Component class="Background">
-				<TextureUID uuid="346d0a29-0588-4837-92bd-fd08f65fedb7" />
-			</Component>	
-		</Components>
-	</GameObject>
-	-->
 	
 	<GameObject uuid="471a4d6c-3054-488d-9049-2c51d1b99441" name="Background">
 		<Components>

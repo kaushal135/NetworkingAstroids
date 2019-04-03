@@ -6,7 +6,7 @@
 			<Rotation a="0"/>
 			<Scale x="1" y="1"/>
 		</Component>	
-		<Component class="RainDrop">
+		<Component class="Player">
 			<TextureUID uuid="69612f00-9d8c-4c11-8bc5-5b992b050597" />
 			<MinSpeed x="0" y="0"/>
 			<MaxSpeed x="100" y="100"/>
