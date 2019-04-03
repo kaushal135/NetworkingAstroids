@@ -156,6 +156,7 @@
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="InputController.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="RainDrop.cpp" />
     <ClCompile Include="RainDropFactory.cpp" />
   </ItemGroup>
@@ -163,6 +164,7 @@
     <ClInclude Include="Background.h" />
     <ClInclude Include="GameCore.h" />
     <ClInclude Include="InputController.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="RainDrop.h" />
     <ClInclude Include="RainDropFactory.h" />
   </ItemGroup>

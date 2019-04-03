@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<GameObject uuid="1eede7d3-5dc1-4209-9548-f5ec0a8249a7" name="player">
+<GameObject uuid="1eede7d3-5dc1-4209-9548-f5ec0a8249a7" name="Player">
 	<Components>
 		<Component class="Transform">
 			<Position x="0" y="0"/>
