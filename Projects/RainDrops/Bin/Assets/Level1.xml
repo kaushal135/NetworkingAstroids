@@ -5,11 +5,11 @@
 	<!-- Texture Asset -->	
 	<Asset>Assets/Raindrop.png</Asset>
 	<Asset>Assets/blue_background.png</Asset>
-	<!-- <Asset>Assets/player.png</Asset>-->
+	<Asset>Assets/Player.png</Asset>
 	
 	<!-- Prefab Example!! -->	
 	<Asset>Assets/RaindropPrefab.xml</Asset>
-	<!--<Asset>Assets/playerPrefab.xml<Asset> -->
+	<Asset>Assets/playerPrefab.xml</Asset>
 </Assets>
 <GameObjects>
 	
