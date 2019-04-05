@@ -1,6 +1,7 @@
 #include "Core.h"
 #include "NetworkServer.h"
 #include "GameObjectManager.h"
+#include "PrefabAsset.h"
 
 void NetworkServer::initialize()
 {
@@ -103,6 +104,13 @@ void NetworkServer::serverUpdate()
 			// Somebody connected
 			std::cout << "Got connection from " << packet->systemAddress.ToString(true) << std::endl;
 			clientConnections.push_back(packet->guid);
+
+			/*Asset* asset = AssetManager::Instance().getAsset(prefabID);
+			if (asset != nullptr)
+			{
+				PrefabAsset* prefab = (PrefabAsset*)asset;
+				GameObject* go = prefab->CreatePrefab();
+			}*/
 
             {
                 RakNet::BitStream bitStream;
