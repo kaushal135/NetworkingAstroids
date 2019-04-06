@@ -17,8 +17,8 @@ void PlayerFactory::load(XMLElement* element)
 	const char* id = prefabElement->GetText();
 	player1PrefabID = getHashCode(id);
 
-	tinyxml2::XMLElement* prefab2Element = element->FirstChildElement("PrefabAsset");
-	THROW_RUNTIME_ERROR(prefab2Element == nullptr, "No PrefabAsset element");
+	tinyxml2::XMLElement* prefab2Element = element->FirstChildElement("PrefabAsset2");
+	THROW_RUNTIME_ERROR(prefab2Element == nullptr, "No PrefabAsset2 element");
 	const char* id2 = prefab2Element->GetText();
 	player2PrefabID = getHashCode(id2);
 
@@ -28,18 +28,25 @@ void PlayerFactory::update(float deltaTime)
 {
 	Component::update(deltaTime);
 
-
-
 	if (NetworkClient::Instance().isClient() == true && 
 		NetworkClient::Instance().getState() == NetworkClient::NetworkClientState::CONNECTED)
 	{
 
 		if (numCurrentPlayer == 0) {
-			Asset* asset = AssetManager::Instance().getAsset(player1PrefabID);
+			/*Asset* asset = AssetManager::Instance().getAsset(player1PrefabID);
 			if (asset != nullptr)
 			{
 				PrefabAsset* prefab = (PrefabAsset*)asset;
 				GameObject* go = prefab->CreatePrefab();
+				numCurrentPlayer++;
+			}*/
+
+			Asset* asset = AssetManager::Instance().getAsset(player2PrefabID);
+			if (asset != nullptr)
+			{
+				PrefabAsset* prefab = (PrefabAsset*)asset;
+				GameObject* go = prefab->CreatePrefab();
+				numCurrentPlayer++;
 			}
 		}
 		else if (numCurrentPlayer == 1)
@@ -49,6 +56,7 @@ void PlayerFactory::update(float deltaTime)
 			{
 				PrefabAsset* prefab = (PrefabAsset*)asset;
 				GameObject* go = prefab->CreatePrefab();
+				numCurrentPlayer++;
 			}
 		} 
 

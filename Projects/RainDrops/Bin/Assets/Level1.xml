@@ -50,7 +50,7 @@
 		<Components>
 			<Component class="PlayerFactory">
 				<PrefabAsset>de16c8e5-3b56-4745-b974-f1cc56505667</PrefabAsset>
-				<PrefabAsset>b72efd35-1013-48e8-a677-c132694fa91f7</PrefabAsset>
+				<PrefabAsset2>b72efd35-1013-48e8-a677-c132694fa91f7</PrefabAsset2>
 			</Component>
 		</Components>
 	</GameObject>

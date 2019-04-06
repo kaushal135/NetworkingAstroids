@@ -2,7 +2,7 @@
 <GameObject uuid="1eede7d3-5dc1-4209-9548-f5ec0a8249a7" name="Player">
 	<Components>
 		<Component class="Transform">
-			<Position x="0" y="0"/>
+			<Position x="120" y="-120"/>
 			<Rotation a="0"/>
 			<Scale x="1" y="1"/>
 		</Component>	
