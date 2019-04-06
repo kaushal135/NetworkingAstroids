@@ -105,13 +105,6 @@ void NetworkServer::serverUpdate()
 			std::cout << "Got connection from " << packet->systemAddress.ToString(true) << std::endl;
 			clientConnections.push_back(packet->guid);
 
-			/*Asset* asset = AssetManager::Instance().getAsset(prefabID);
-			if (asset != nullptr)
-			{
-				PrefabAsset* prefab = (PrefabAsset*)asset;
-				GameObject* go = prefab->CreatePrefab();
-			}*/
-
             {
                 RakNet::BitStream bitStream;
                 bitStream.Write((unsigned char)ID_SNAPSHOT);

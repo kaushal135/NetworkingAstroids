@@ -4,7 +4,9 @@
 #include "RainDropFactory.h"
 #include "RainDrop.h"
 #include "InputController.h"
+#include "PlayerFactory.h"
 #include "Player.h"
+
 
 int main()
 {

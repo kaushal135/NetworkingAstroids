@@ -6,10 +6,12 @@
 	<Asset>Assets/Raindrop.png</Asset>
 	<Asset>Assets/blue_background.png</Asset>
 	<Asset>Assets/Player.png</Asset>
+	<Asset>Assets/Player2.png</Asset>
 	
 	<!-- Prefab Example!! -->	
 	<Asset>Assets/RaindropPrefab.xml</Asset>
 	<Asset>Assets/playerPrefab.xml</Asset>
+	<Asset>Assets/player2Prefab.xml</Asset>
 </Assets>
 <GameObjects>
 	
@@ -44,6 +46,15 @@
 		</Components>
 	</GameObject>
 
+	<GameObject uuid="def15ef9-2d6e-48ec-8a6d-50de8561e4ef" name="PlayerFactory">
+		<Components>
+			<Component class="PlayerFactory">
+				<PrefabAsset>de16c8e5-3b56-4745-b974-f1cc56505667</PrefabAsset>
+				<PrefabAsset>b72efd35-1013-48e8-a677-c132694fa91f7</PrefabAsset>
+			</Component>
+		</Components>
+	</GameObject>
+	
 	<GameObject uuid="513a05a8-39e6-4f75-a0f3-6d5e2921042c" name="InputController">
 		<Components>
 			<Component class="InputController">
