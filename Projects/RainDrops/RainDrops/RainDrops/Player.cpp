@@ -11,13 +11,13 @@ void Player::initialize()
 
 	if (NetworkServer::Instance().isServer())
 	{
-		speed.x = (maxSpeed.x - minSpeed.x) * Random.Random();
-		speed.y = (maxSpeed.y - minSpeed.y) * Random.Random();
+		speed.x = minSpeed.x;
+		speed.y = minSpeed.y;
 
-		sf::Vector2f pos;
+		/*sf::Vector2f pos;
 		pos.x = RenderSystem::Instance().getView().getSize().x * Random.Random();
 		pos.y = (RenderSystem::Instance().getView().getSize().y * -1.0f) - 64.0f;
-		gameObject->getTransform()->setPosition(pos);
+		gameObject->getTransform()->setPosition(pos);*/
 	}
 }
 
@@ -60,6 +60,11 @@ void Player::readCreate(RakNet::BitStream & bs)
 
 	bs.Read(speed.x);
 	bs.Read(speed.y);
+}
+
+void Player::moveRpcCallback(moveDirections dir)
+{
+
 }
 
 void Player::update(float deltaTime)
