@@ -2,45 +2,39 @@
 <Files>
 </Files>
 <Assets>
-	<!-- Texture Asset -->	
+	<!-- Texture Asset -->
 	<Asset>Assets/Raindrop.png</Asset>
 	<Asset>Assets/blue_background.png</Asset>
 	<Asset>Assets/player.png</Asset>
-	
-	<!-- Prefab Example!! -->	
-	<Asset>Assets/RaindropPrefab.xml</Asset>
+	<Asset>Assets/meteorBrown_big1.png</Asset>
+	<Asset>Assets/meteorBrown_big2.png</Asset>
+	<Asset>Assets/meteorBrown_big3.png</Asset>
+	<Asset>Assets/meteorBrown_med1.png</Asset>
+	<Asset>Assets/meteorBrown_med3.png</Asset>
+	<Asset>Assets/meteorBrown_small1.png</Asset>
+	<Asset>Assets/meteorBrown_small2.png</Asset>
+	<Asset>Assets/meteorBrown_tiny1.png</Asset>
+	<Asset>Assets/meteorBrown_tiny2.png</Asset>
+	<!-- Prefab Example!! -->
+	<Asset>Assets/MeteorPrefab.xml</Asset>
+	<Asset>Assets/playerPrefab.xml</Asset>
 	<!--<Asset>Assets/playerPrefab.xml<Asset> -->
 </Assets>
 <GameObjects>
 
-	<!--
-	<GameObject uuid="7f95b98e-d0ad-4f26-a885-db6121ef0a67" name="Background">
-		<Components>
-			<Component class="Transform">
-				<Position x="400" y="-300"/>
-				<Rotation a="0"/>
-				<Scale x="0.5" y="0.5"/>
-			</Component>	
-			<Component class="Background">
-				<TextureUID uuid="346d0a29-0588-4837-92bd-fd08f65fedb7" />
-			</Component>	
-		</Components>
-	</GameObject>
-	-->
-	
 	<GameObject uuid="471a4d6c-3054-488d-9049-2c51d1b99441" name="Background">
 		<Components>
 			<Component class="Transform">
 				<Position x="400" y="-300"/>
 				<Rotation a="0"/>
 				<Scale x="3.2" y="3.2"/>
-			</Component>	
+			</Component>
 			<Component class="Background">
 				<TextureUID uuid="577177e0-c86a-45e5-afc3-b16fb44fd265" />
-			</Component>	
+			</Component>
 		</Components>
 	</GameObject>
-	
+
 	<GameObject uuid="5496f9b4-6c71-4a48-92a7-e632d3dcccea" name="Camera">
 		<Components>
 			<Component class="Camera">
@@ -53,7 +47,7 @@
 	<GameObject uuid="dd5c236c-5ab3-4632-82e1-a2a6175f2b45" name="RainDropFactory">
 		<Components>
 			<Component class="RainDropFactory">
-				<PrefabAsset>9930f483-8b0b-4d7e-ae1f-c55f641000ac</PrefabAsset>
+				<PrefabAsset>98c6e649-0fd1-4b0f-969a-d279740741bb</PrefabAsset>
 				<SpawnDelay value="1" />
 			</Component>
 		</Components>
