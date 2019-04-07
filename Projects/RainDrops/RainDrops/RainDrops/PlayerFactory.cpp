@@ -8,6 +8,13 @@
 
 IMPLEMENT_DYNAMIC_CLASS(PlayerFactory)
 
+void PlayerFactory::initialize()
+{
+	Component::initialize();
+
+	registerRPC(getHashCode("spawnPlayerRpcCallback"), std::bind(&PlayerFactory::spawnPlayerRpcCallback, this, _1));
+}
+
 void PlayerFactory::load(XMLElement* element)
 {
 	Component::load(element);
@@ -15,55 +22,38 @@ void PlayerFactory::load(XMLElement* element)
 	tinyxml2::XMLElement* prefabElement = element->FirstChildElement("PrefabAsset");
 	THROW_RUNTIME_ERROR(prefabElement == nullptr, "No PrefabAsset element");
 	const char* id = prefabElement->GetText();
-	player1PrefabID = getHashCode(id);
+	playerPrefabID[0] = getHashCode(id);
 
 	tinyxml2::XMLElement* prefab2Element = element->FirstChildElement("PrefabAsset2");
 	THROW_RUNTIME_ERROR(prefab2Element == nullptr, "No PrefabAsset2 element");
 	const char* id2 = prefab2Element->GetText();
-	player2PrefabID = getHashCode(id2);
+	playerPrefabID[1] = getHashCode(id2);
 
+}
+
+void PlayerFactory::spawnPlayerRpcCallback(RakNet::BitStream& bitStream)
+{
+	if (numCurrentPlayer < 2) {
+		Asset* asset = AssetManager::Instance().getAsset(playerPrefabID[numCurrentPlayer]);
+		if (asset != nullptr)
+		{
+			PrefabAsset* prefab = (PrefabAsset*)asset;
+			GameObject* go = prefab->CreatePrefab();
+			numCurrentPlayer++;
+		}
+	}
 }
 
 void PlayerFactory::update(float deltaTime)
 {
 	Component::update(deltaTime);
 
-	if (NetworkClient::Instance().isClient() == true && 
-		NetworkClient::Instance().getState() == NetworkClient::NetworkClientState::CONNECTED)
-	{
-
-		if (numCurrentPlayer == 0) {
-			/*Asset* asset = AssetManager::Instance().getAsset(player1PrefabID);
-			if (asset != nullptr)
-			{
-				PrefabAsset* prefab = (PrefabAsset*)asset;
-				GameObject* go = prefab->CreatePrefab();
-				numCurrentPlayer++;
-			}*/
-
-			Asset* asset = AssetManager::Instance().getAsset(player2PrefabID);
-			if (asset != nullptr)
-			{
-				PrefabAsset* prefab = (PrefabAsset*)asset;
-				GameObject* go = prefab->CreatePrefab();
-				numCurrentPlayer++;
-			}
-		}
-		else if (numCurrentPlayer == 1)
-		{
-			Asset* asset = AssetManager::Instance().getAsset(player2PrefabID);
-			if (asset != nullptr)
-			{
-				PrefabAsset* prefab = (PrefabAsset*)asset;
-				GameObject* go = prefab->CreatePrefab();
-				numCurrentPlayer++;
-			}
-		} 
-
-		
+	if (NetworkClient::Instance().isClient() == true)
+	{	
+		return;
 	}
 
-	
+
 
 }
 

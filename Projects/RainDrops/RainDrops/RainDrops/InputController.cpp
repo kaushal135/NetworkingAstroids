@@ -18,7 +18,7 @@ void InputController::update(float deltaTime)
     Component::update(deltaTime);
 
     if (NetworkServer::Instance().isServer() == true || 
-		NetworkClient::Instance().getState() == NetworkClient::NetworkClientState::CONNECTED)
+		NetworkClient::Instance().getState() != NetworkClient::NetworkClientState::CONNECTED)
     {
         return;
     }
