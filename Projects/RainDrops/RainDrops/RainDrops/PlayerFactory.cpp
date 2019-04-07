@@ -12,7 +12,7 @@ void PlayerFactory::initialize()
 {
 	Component::initialize();
 
-	registerRPC(getHashCode("spawnPlayerRpcCallback"), std::bind(&PlayerFactory::spawnPlayerRpcCallback, this, _1));
+	//registerRPC(getHashCode("spawnPlayerRpcCallback"), std::bind(&PlayerFactory::spawnPlayerRpcCallback, this, _1));
 }
 
 void PlayerFactory::load(XMLElement* element)

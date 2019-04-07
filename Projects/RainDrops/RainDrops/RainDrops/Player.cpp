@@ -79,5 +79,8 @@ void Player::update(float deltaTime)
 	{
 		GameObjectManager::Instance().DestroyGameObject(gameObject);
 	}
+
+
+
 }
 
