@@ -14,6 +14,7 @@ int main()
 	REGISTER_DYNAMIC_CLASS(RainDropFactory);
     REGISTER_DYNAMIC_CLASS(RainDrop);
     REGISTER_DYNAMIC_CLASS(InputController);
+	REGISTER_DYNAMIC_CLASS(PlayerFactory);
 	REGISTER_DYNAMIC_CLASS(Player);
 	
 	GameEngine::Instance().initialize();
