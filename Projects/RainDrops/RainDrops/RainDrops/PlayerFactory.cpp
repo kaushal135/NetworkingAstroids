@@ -13,7 +13,7 @@ using namespace std::placeholders;
 void PlayerFactory::initialize()
 {
 	Component::initialize();
-	numCurrentPlayer = 0;
+	registerRPC(getHashCode("spawnPlayer"), std::bind(&PlayerFactory::spawnPlayer, this, _1));
 }
 
 void PlayerFactory::load(XMLElement* element)
@@ -32,7 +32,7 @@ void PlayerFactory::load(XMLElement* element)
 
 }
 
-void PlayerFactory::spawnPlayer()
+void PlayerFactory::spawnPlayer(RakNet::BitStream& bitStream)
 {
 	if (numCurrentPlayer < 2) {
 		Asset* asset = AssetManager::Instance().getAsset(playerPrefabID[numCurrentPlayer]);
@@ -51,11 +51,15 @@ void PlayerFactory::update(float deltaTime)
 {
 	Component::update(deltaTime);
 
-	if (NetworkServer::Instance().isServer()) {
-		if (isSpawned[numCurrentPlayer] == false && NetworkClient::Instance().getState() == NetworkClient::NetworkClientState::CONNECTED)
-		{
-			spawnPlayer();
+	if (NetworkClient::Instance().isClient() && NetworkClient::Instance().getState() == NetworkClient::NetworkClientState::CONNECTED) {
+		if (isSpawned[numCurrentPlayer] == false) {
+			RakNet::BitStream bitStream;
+			bitStream.Write((unsigned char)ID_RPC_MESSAGE);
+			bitStream.Write(PlayerFactory::getClassHashCode());
+			bitStream.Write(getHashCode("spawnPlayer"));
+			NetworkClient::Instance().callRPC(bitStream);
 		}
+		
 	}
 
 }

@@ -16,7 +16,7 @@ public:
 	virtual void update(float deltaTime);
 	virtual void load(XMLElement* element);
 
-	void spawnPlayer();
+	void spawnPlayer(RakNet::BitStream& bitStream);
 
 
 
