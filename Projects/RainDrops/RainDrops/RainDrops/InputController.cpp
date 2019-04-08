@@ -18,7 +18,7 @@ void InputController::update(float deltaTime)
     Component::update(deltaTime);
 
     if (NetworkServer::Instance().isServer() == true || 
-		NetworkClient::Instance().getState() == NetworkClient::NetworkClientState::CONNECTED)
+		NetworkClient::Instance().getState() != NetworkClient::NetworkClientState::CONNECTED)
     {
         return;
     }
@@ -37,6 +37,10 @@ void InputController::update(float deltaTime)
 
         NetworkClient::Instance().callRPC(bitStream);
     }
+
+	if (InputManager::Instance().keyPressed(sf::Keyboard::D)) {
+		std::cout << "Hello world" << std::endl;
+	}
 }
 
 void InputController::rpcCallback(RakNet::BitStream& bitStream)

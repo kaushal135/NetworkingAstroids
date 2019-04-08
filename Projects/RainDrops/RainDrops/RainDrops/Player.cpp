@@ -1,12 +1,76 @@
 #include "GameCore.h"
 #include "Player.h"
+#include "PrefabAsset.h"
+#include "Transform.h"
 
+IMPLEMENT_DYNAMIC_CLASS(Player)
 
-Player::Player()
+void Player::initialize()
 {
+	Sprite::initialize();
+
+	if (NetworkServer::Instance().isServer())
+	{
+		speed.x = minSpeed.x;
+		speed.y = minSpeed.y;
+	}
 }
 
-
-Player::~Player()
+void Player::load(XMLElement* element)
 {
+	Sprite::load(element);
+
+	XMLElement* minElement = element->FirstChildElement("MinSpeed");
+	THROW_RUNTIME_ERROR(minElement == nullptr, "No Min Element");
+	minSpeed = sf::Vector2f(minElement->FloatAttribute("x"), minElement->FloatAttribute("y"));
+
+	XMLElement* maxElement = element->FirstChildElement("MaxSpeed");
+	THROW_RUNTIME_ERROR(maxElement == nullptr, "No Max Element");
+	maxSpeed = sf::Vector2f(maxElement->FloatAttribute("x"), maxElement->FloatAttribute("y"));
 }
+
+void Player::writeCreate(RakNet::BitStream & bs) const
+{
+	Sprite::writeCreate(bs);
+
+	// Write the data needed
+	bs.Write(maxSpeed.x);
+	bs.Write(maxSpeed.y);
+	bs.Write(minSpeed.x);
+	bs.Write(minSpeed.y);
+
+	bs.Write(speed.x);
+	bs.Write(speed.y);
+}
+
+void Player::readCreate(RakNet::BitStream & bs)
+{
+	Sprite::readCreate(bs);
+
+	// Read the data needed
+	bs.Read(maxSpeed.x);
+	bs.Read(maxSpeed.y);
+	bs.Read(minSpeed.x);
+	bs.Read(minSpeed.y);
+
+	bs.Read(speed.x);
+	bs.Read(speed.y);
+}
+
+void Player::update(float deltaTime)
+{
+	Sprite::update(deltaTime);
+
+	if (gameObject->getTransform()->getPosition().y < 50)
+	{
+		gameObject->getTransform()->move(speed.x * deltaTime, speed.y * deltaTime);
+	}
+	else
+	{
+		GameObjectManager::Instance().DestroyGameObject(gameObject);
+	}
+
+
+
+}
+

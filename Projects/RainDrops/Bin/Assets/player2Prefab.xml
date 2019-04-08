@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
-<GameObject uuid="1eede7d3-5dc1-4209-9548-f5ec0a8249a7" name="Player">
+<GameObject uuid="17d3003b-ea18-4681-81b3-c866ec025dda" name="Player">
 	<Components>
 		<Component class="Transform">
-			<Position x="120" y="-120"/>
+			<Position x="220" y="-120"/>
 			<Rotation a="0"/>
 			<Scale x="1" y="1"/>
 		</Component>	
 		<Component class="Player">
-			<TextureUID uuid="69612f00-9d8c-4c11-8bc5-5b992b050597" />
+			<TextureUID uuid="b46d57e5-a1b7-4085-879f-6e8085c8be44" />
 			<MinSpeed x="0" y="0"/>
 			<MaxSpeed x="100" y="100"/>
 		</Component>	

@@ -1,6 +1,8 @@
 #include "Core.h"
 #include "NetworkServer.h"
 #include "GameObjectManager.h"
+#include "PrefabAsset.h"
+
 
 void NetworkServer::initialize()
 {

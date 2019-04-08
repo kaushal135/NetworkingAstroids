@@ -5,7 +5,8 @@
 	<!-- Texture Asset -->
 	<Asset>Assets/Raindrop.png</Asset>
 	<Asset>Assets/blue_background.png</Asset>
-	<Asset>Assets/player.png</Asset>
+	<Asset>Assets/Player.png</Asset>
+	<Asset>Assets/Player2.png</Asset>
 	<Asset>Assets/meteorBrown_big1.png</Asset>
 	<Asset>Assets/meteorBrown_big2.png</Asset>
 	<Asset>Assets/meteorBrown_big3.png</Asset>
@@ -15,13 +16,32 @@
 	<Asset>Assets/meteorBrown_small2.png</Asset>
 	<Asset>Assets/meteorBrown_tiny1.png</Asset>
 	<Asset>Assets/meteorBrown_tiny2.png</Asset>
-	<!-- Prefab Example!! -->
-	<Asset>Assets/MeteorPrefab.xml</Asset>
+	
+	<!-- Prefab Example!! -->	
+	<Asset>Assets/RaindropPrefab.xml</Asset>
 	<Asset>Assets/playerPrefab.xml</Asset>
+	<Asset>Assets/player2Prefab.xml</Asset>
+	<Asset>Assets/MeteorPrefab.xml</Asset>
+
 	<!--<Asset>Assets/playerPrefab.xml<Asset> -->
 </Assets>
 <GameObjects>
 
+	<!--
+	<GameObject uuid="7f95b98e-d0ad-4f26-a885-db6121ef0a67" name="Background">
+		<Components>
+			<Component class="Transform">
+				<Position x="400" y="-300"/>
+				<Rotation a="0"/>
+				<Scale x="0.5" y="0.5"/>
+			</Component>	
+			<Component class="Background">
+				<TextureUID uuid="346d0a29-0588-4837-92bd-fd08f65fedb7" />
+			</Component>	
+		</Components>
+	</GameObject>
+	-->
+	
 	<GameObject uuid="471a4d6c-3054-488d-9049-2c51d1b99441" name="Background">
 		<Components>
 			<Component class="Transform">
@@ -53,6 +73,15 @@
 		</Components>
 	</GameObject>
 
+	<GameObject uuid="def15ef9-2d6e-48ec-8a6d-50de8561e4ef" name="PlayerFactory">
+		<Components>
+			<Component class="PlayerFactory">
+				<PrefabAsset>de16c8e5-3b56-4745-b974-f1cc56505667</PrefabAsset>
+				<PrefabAsset2>b72efd35-1013-48e8-a677-c132694fa91f7</PrefabAsset2>
+			</Component>
+		</Components>
+	</GameObject>
+	
 	<GameObject uuid="513a05a8-39e6-4f75-a0f3-6d5e2921042c" name="InputController">
 		<Components>
 			<Component class="InputController">
