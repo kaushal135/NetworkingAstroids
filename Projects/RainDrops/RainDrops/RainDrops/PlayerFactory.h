@@ -12,12 +12,6 @@ class PlayerFactory : public Component
 
 public:
 
-	inline static PlayerFactory& Instance()
-	{
-		static PlayerFactory instance;
-		return instance;
-	}
-
 	void initialize() override;
 	virtual void update(float deltaTime);
 	virtual void load(XMLElement* element);
@@ -27,9 +21,9 @@ public:
 
 
 private:
-	
-	bool isSpawned[2] = { false, false };
+
 	int numCurrentPlayer = 0;
+	bool isSpawned[2] = { false, false };
 	STRCODE playerPrefabID[2];
 
 };

@@ -34,14 +34,14 @@ void PlayerFactory::load(XMLElement* element)
 
 void PlayerFactory::spawnPlayer()
 {
-	if (PlayerFactory::Instance().numCurrentPlayer < 2) {
-		Asset* asset = AssetManager::Instance().getAsset(playerPrefabID[PlayerFactory::Instance().numCurrentPlayer]);
+	if (numCurrentPlayer < 2) {
+		Asset* asset = AssetManager::Instance().getAsset(playerPrefabID[numCurrentPlayer]);
 		if (asset != nullptr)
 		{
 			PrefabAsset* prefab = (PrefabAsset*)asset;
 			GameObject* go = prefab->CreatePrefab();
-			PlayerFactory::Instance().isSpawned[PlayerFactory::Instance().numCurrentPlayer] = true;
-			PlayerFactory::Instance().numCurrentPlayer++;
+			isSpawned[numCurrentPlayer] = true;
+			numCurrentPlayer++;
 
 		}
 	}
@@ -51,9 +51,11 @@ void PlayerFactory::update(float deltaTime)
 {
 	Component::update(deltaTime);
 
-	if (PlayerFactory::Instance().isSpawned[PlayerFactory::Instance().numCurrentPlayer] == false && NetworkClient::Instance().getState() == NetworkClient::NetworkClientState::CONNECTED)
-	{	
-		spawnPlayer();
+	if (NetworkServer::Instance().isServer()) {
+		if (isSpawned[numCurrentPlayer] == false && NetworkClient::Instance().getState() == NetworkClient::NetworkClientState::CONNECTED)
+		{
+			spawnPlayer();
+		}
 	}
 
 }
