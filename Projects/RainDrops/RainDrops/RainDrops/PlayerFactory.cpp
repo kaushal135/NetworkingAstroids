@@ -13,8 +13,7 @@ using namespace std::placeholders;
 void PlayerFactory::initialize()
 {
 	Component::initialize();
-
-	registerRPC(getHashCode("spawnPlayerRpcCallback"), std::bind(&PlayerFactory::spawnPlayerRpcCallback, this, _1));
+	numCurrentPlayer = 0;
 }
 
 void PlayerFactory::load(XMLElement* element)
@@ -33,15 +32,17 @@ void PlayerFactory::load(XMLElement* element)
 
 }
 
-void PlayerFactory::spawnPlayerRpcCallback(RakNet::BitStream& bitStream)
+void PlayerFactory::spawnPlayer()
 {
-	if (numCurrentPlayer < 2) {
-		Asset* asset = AssetManager::Instance().getAsset(playerPrefabID[numCurrentPlayer]);
+	if (PlayerFactory::Instance().numCurrentPlayer < 2) {
+		Asset* asset = AssetManager::Instance().getAsset(playerPrefabID[PlayerFactory::Instance().numCurrentPlayer]);
 		if (asset != nullptr)
 		{
 			PrefabAsset* prefab = (PrefabAsset*)asset;
 			GameObject* go = prefab->CreatePrefab();
-			numCurrentPlayer++;
+			PlayerFactory::Instance().isSpawned[PlayerFactory::Instance().numCurrentPlayer] = true;
+			PlayerFactory::Instance().numCurrentPlayer++;
+
 		}
 	}
 }
@@ -50,12 +51,10 @@ void PlayerFactory::update(float deltaTime)
 {
 	Component::update(deltaTime);
 
-	if (NetworkClient::Instance().isClient() == true)
+	if (PlayerFactory::Instance().isSpawned[PlayerFactory::Instance().numCurrentPlayer] == false && NetworkClient::Instance().getState() == NetworkClient::NetworkClientState::CONNECTED)
 	{	
-		return;
+		spawnPlayer();
 	}
-
-
 
 }
 

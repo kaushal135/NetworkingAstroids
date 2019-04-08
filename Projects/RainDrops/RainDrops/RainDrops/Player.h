@@ -7,14 +7,7 @@ class Player : public Sprite
 {
 	DECLARE_DYNAMIC_DERIVED_CLASS(Player, Sprite)
 
-	enum moveDirections
-	{
-		Up,
-		Down,
-		Left,
-		Right
-	};
-
+	   
 public:
 	void initialize() override;
 	virtual void update(float deltaTime) override;
@@ -23,7 +16,8 @@ public:
 	void writeCreate(RakNet::BitStream & bs) const override;
 	void readCreate(RakNet::BitStream & bs) override;
 
-	void moveRpcCallback(moveDirections dir);
+	const sf::Vector2f& getSpeed() const { return speed; }
+	void setSpeed(const sf::Vector2f& _speed) { speed = _speed; }
 
 private:
 	sf::Vector2f speed;

@@ -22,11 +22,13 @@ public:
 	virtual void update(float deltaTime);
 	virtual void load(XMLElement* element);
 
-	void spawnPlayerRpcCallback(RakNet::BitStream& bitStream);
+	void spawnPlayer();
 
 
 
 private:
+	
+	bool isSpawned[2] = { false, false };
 	int numCurrentPlayer = 0;
 	STRCODE playerPrefabID[2];
 
