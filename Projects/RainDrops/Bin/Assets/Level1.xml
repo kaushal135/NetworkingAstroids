@@ -7,12 +7,6 @@
 	<Asset>Assets/blue_background.png</Asset>
 	<Asset>Assets/Player.png</Asset>
 	<Asset>Assets/Player2.png</Asset>
-	
-	<!-- Prefab Example!! -->	
-	<Asset>Assets/RaindropPrefab.xml</Asset>
-	<Asset>Assets/playerPrefab.xml</Asset>
-	<Asset>Assets/player2Prefab.xml</Asset>
-	<Asset>Assets/player.png</Asset>
 	<Asset>Assets/meteorBrown_big1.png</Asset>
 	<Asset>Assets/meteorBrown_big2.png</Asset>
 	<Asset>Assets/meteorBrown_big3.png</Asset>
@@ -22,9 +16,13 @@
 	<Asset>Assets/meteorBrown_small2.png</Asset>
 	<Asset>Assets/meteorBrown_tiny1.png</Asset>
 	<Asset>Assets/meteorBrown_tiny2.png</Asset>
-	<!-- Prefab Example!! -->
-	<Asset>Assets/MeteorPrefab.xml</Asset>
+	
+	<!-- Prefab Example!! -->	
+	<Asset>Assets/RaindropPrefab.xml</Asset>
 	<Asset>Assets/playerPrefab.xml</Asset>
+	<Asset>Assets/player2Prefab.xml</Asset>
+	<Asset>Assets/MeteorPrefab.xml</Asset>
+
 	<!--<Asset>Assets/playerPrefab.xml<Asset> -->
 </Assets>
 <GameObjects>
