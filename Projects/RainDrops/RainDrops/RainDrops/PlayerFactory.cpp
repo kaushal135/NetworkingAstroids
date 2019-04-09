@@ -34,15 +34,16 @@ void PlayerFactory::load(XMLElement* element)
 
 void PlayerFactory::spawnPlayer(RakNet::BitStream& bitStream)
 {
-	if (numCurrentPlayer < 2) {
-		Asset* asset = AssetManager::Instance().getAsset(playerPrefabID[numCurrentPlayer]);
-		if (asset != nullptr)
-		{
-			PrefabAsset* prefab = (PrefabAsset*)asset;
-			GameObject* go = prefab->CreatePrefab();
-			isSpawned[numCurrentPlayer] = true;
-			numCurrentPlayer++;
+	if (NetworkServer::Instance().isServer()) {
+		if (numCurrentPlayer < 2) {
+			Asset* asset = AssetManager::Instance().getAsset(playerPrefabID[numCurrentPlayer]);
+			if (asset != nullptr)
+			{
+				PrefabAsset* prefab = (PrefabAsset*)asset;
+				GameObject* go = prefab->CreatePrefab();
+				numCurrentPlayer++;
 
+			}
 		}
 	}
 }
@@ -58,6 +59,7 @@ void PlayerFactory::update(float deltaTime)
 			bitStream.Write(gameObject->getUID());
 			bitStream.Write(PlayerFactory::getClassHashCode());
 			bitStream.Write(getHashCode("spawnPlayer"));
+			isSpawned[numCurrentPlayer] = true;
 			NetworkClient::Instance().callRPC(bitStream);
 		}
 		
