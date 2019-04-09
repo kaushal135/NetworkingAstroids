@@ -25,24 +25,25 @@ void PlayerFactory::load(XMLElement* element)
 	const char* id = prefabElement->GetText();
 	playerPrefabID[0] = getHashCode(id);
 
-	tinyxml2::XMLElement* prefab2Element = element->FirstChildElement("PrefabAsset2");
-	THROW_RUNTIME_ERROR(prefab2Element == nullptr, "No PrefabAsset2 element");
-	const char* id2 = prefab2Element->GetText();
+	prefabElement = prefabElement->NextSiblingElement("PrefabAsset");
+	THROW_RUNTIME_ERROR(prefabElement == nullptr, "No PrefabAsset2 element");
+	const char* id2 = prefabElement->GetText();
 	playerPrefabID[1] = getHashCode(id2);
 
 }
 
 void PlayerFactory::spawnPlayer(RakNet::BitStream& bitStream)
 {
-	if (numCurrentPlayer < 2) {
-		Asset* asset = AssetManager::Instance().getAsset(playerPrefabID[numCurrentPlayer]);
-		if (asset != nullptr)
-		{
-			PrefabAsset* prefab = (PrefabAsset*)asset;
-			GameObject* go = prefab->CreatePrefab();
-			isSpawned[numCurrentPlayer] = true;
-			numCurrentPlayer++;
+	if (NetworkServer::Instance().isServer()) {
+		if (numCurrentPlayer < 2) {
+			Asset* asset = AssetManager::Instance().getAsset(playerPrefabID[numCurrentPlayer]);
+			if (asset != nullptr)
+			{
+				PrefabAsset* prefab = (PrefabAsset*)asset;
+				GameObject* go = prefab->CreatePrefab();
+				numCurrentPlayer++;
 
+			}
 		}
 	}
 }
@@ -55,8 +56,10 @@ void PlayerFactory::update(float deltaTime)
 		if (isSpawned[numCurrentPlayer] == false) {
 			RakNet::BitStream bitStream;
 			bitStream.Write((unsigned char)ID_RPC_MESSAGE);
+			bitStream.Write(gameObject->getUID());
 			bitStream.Write(PlayerFactory::getClassHashCode());
 			bitStream.Write(getHashCode("spawnPlayer"));
+			isSpawned[numCurrentPlayer] = true;
 			NetworkClient::Instance().callRPC(bitStream);
 		}
 		
