@@ -11,7 +11,7 @@ void InputController::initialize()
     Component::initialize();
 
     registerRPC(getHashCode("movePlayerCallback"), std::bind(&InputController::movePlayerCallback, this, _1));
-	registerRPC(getHashCode("setPlayerCallback"), std::bind(&InputController::movePlayerCallback, this, _1));
+	registerRPC(getHashCode("setPlayerCallback"), std::bind(&InputController::setPlayerCallback, this, _1));
 }
 
 void InputController::update(float deltaTime)
