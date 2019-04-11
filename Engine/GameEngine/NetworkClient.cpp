@@ -141,6 +141,11 @@ void NetworkClient::clientUpdate()
 			case ID_GAMEOBJECT:
 				GameObjectManager::Instance().processPacket(bs);
 				break;
+
+			case ID_RPC_MESSAGE:
+				GameObjectManager::Instance().invokeRPC(bs);
+				break;
+
 		}
 
 		rakInterface->DeallocatePacket(packet);

@@ -5,6 +5,7 @@
 #include "PrefabAsset.h"
 #include "Transform.h"
 #include "Player.h"
+#include "InputController.h"
 
 IMPLEMENT_DYNAMIC_CLASS(PlayerFactory)
 
@@ -41,6 +42,29 @@ void PlayerFactory::spawnPlayer(RakNet::BitStream& bitStream)
 			{
 				PrefabAsset* prefab = (PrefabAsset*)asset;
 				GameObject* go = prefab->CreatePrefab();
+
+				playerPool[numCurrentPlayer];
+
+				auto gameObjects = GameObjectManager::Instance().GetAllRootGameObjects();
+				for (auto gObject : gameObjects)
+				{
+					InputController* ctrl = dynamic_cast<InputController*>(
+						gObject->GetComponentByUUID(InputController::getClassHashCode()));
+
+					if (ctrl != nullptr)
+					{
+
+						RakNet::BitStream bitStream;
+						bitStream.Write((unsigned char)ID_RPC_MESSAGE);
+						bitStream.Write(gObject->getUID());
+						bitStream.Write(InputController::getClassHashCode());
+						bitStream.Write(getHashCode("setPlayerCallback"));
+						bitStream.Write(go->getUID());
+
+						NetworkServer::Instance().callRPC(bitStream);
+					}
+				}
+
 				numCurrentPlayer++;
 
 			}
@@ -62,7 +86,7 @@ void PlayerFactory::update(float deltaTime)
 			isSpawned[numCurrentPlayer] = true;
 			NetworkClient::Instance().callRPC(bitStream);
 		}
-		
+
 	}
 
 }

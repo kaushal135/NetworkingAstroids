@@ -149,4 +149,10 @@ void NetworkServer::serverUpdate()
 		// get next packet
 		packet = rakInterface->Receive();
 	}
+
+}
+
+void NetworkServer::callRPC(RakNet::BitStream& bitStream, unsigned int index)
+{
+	rakInterface->Send(&bitStream, MEDIUM_PRIORITY, RELIABLE_ORDERED, 0, clientConnections.at(index), false);
 }

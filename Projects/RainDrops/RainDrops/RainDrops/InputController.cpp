@@ -23,7 +23,7 @@ void InputController::update(float deltaTime)
         return;
     }
 
-    if (InputManager::Instance().mousePressed(sf::Mouse::Left))
+    /*if (InputManager::Instance().mousePressed(sf::Mouse::Left))
     {
         RakNet::BitStream bitStream;
         bitStream.Write((unsigned char)ID_RPC_MESSAGE);
@@ -36,11 +36,26 @@ void InputController::update(float deltaTime)
         bitStream.Write(mousePosition.y);
 
         NetworkClient::Instance().callRPC(bitStream);
-    }
+    }*/
 
-	if (InputManager::Instance().keyPressed(sf::Keyboard::D)) {
-		std::cout << "Hello world" << std::endl;
+	if (myShip != nullptr) {
+		if (InputManager::Instance().keyPressed(sf::Keyboard::D)) {
+			std::cout << "Right" << std::endl;
+		}
+		if (InputManager::Instance().keyPressed(sf::Keyboard::A)) {
+			std::cout << "Left" << std::endl;
+		}
+		if (InputManager::Instance().keyPressed(sf::Keyboard::W)) {
+			std::cout << "Up" << std::endl;
+		}
+		if (InputManager::Instance().keyPressed(sf::Keyboard::S)) {
+			std::cout << "Down" << std::endl;
+		}
+		if (InputManager::Instance().keyPressed(sf::Keyboard::Space)) {
+			std::cout << "Shoot" << std::endl;
+		}
 	}
+	
 }
 
 void InputController::rpcCallback(RakNet::BitStream& bitStream)
@@ -64,4 +79,29 @@ void InputController::rpcCallback(RakNet::BitStream& bitStream)
             }
         }
     }
+}
+
+
+void InputController::setPlayerCallback(RakNet::BitStream & bitStream)
+{
+	STRCODE myShipID;
+	bitStream.Read(myShipID);
+
+	if (myShipID != 0)
+	{
+		auto gameObjects = GameObjectManager::Instance().GetAllRootGameObjects();
+		for (auto go : gameObjects)
+		{
+			Player* spaceship = dynamic_cast<Player*>(
+				go->GetComponentByUUID(Player::getClassHashCode()));
+
+			if (spaceship != nullptr)
+			{
+				if (go->getUID() == myShipID)
+				{
+					myShip = spaceship;
+				}
+			}
+		}
+	}
 }
