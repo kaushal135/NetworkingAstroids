@@ -10,7 +10,8 @@ void InputController::initialize()
 {
     Component::initialize();
 
-    registerRPC(getHashCode("rpcCallback"), std::bind(&InputController::rpcCallback, this, _1));
+    registerRPC(getHashCode("movePlayerCallback"), std::bind(&InputController::movePlayerCallback, this, _1));
+	registerRPC(getHashCode("setPlayerCallback"), std::bind(&InputController::movePlayerCallback, this, _1));
 }
 
 void InputController::update(float deltaTime)
@@ -29,7 +30,7 @@ void InputController::update(float deltaTime)
         bitStream.Write((unsigned char)ID_RPC_MESSAGE);
         bitStream.Write(gameObject->getUID());
         bitStream.Write(InputController::getClassHashCode());
-        bitStream.Write(getHashCode("rpcCallback"));
+        bitStream.Write(getHashCode("movePlayerCallback"));
 
         sf::Vector2f mousePosition = InputManager::Instance().getMousePosition();
         bitStream.Write(mousePosition.x);
@@ -58,7 +59,7 @@ void InputController::update(float deltaTime)
 	
 }
 
-void InputController::rpcCallback(RakNet::BitStream& bitStream)
+void InputController::movePlayerCallback(RakNet::BitStream& bitStream)
 {
     sf::Vector2f mousePosition;
     bitStream.Read(mousePosition.x);

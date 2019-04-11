@@ -15,7 +15,7 @@ public:
     void initialize() override;
     void update(float deltaTime) override;
 	
-    void rpcCallback(RakNet::BitStream& bitStream);
+    void movePlayerCallback(RakNet::BitStream& bitStream);
 	void setPlayerCallback(RakNet::BitStream & bitStream);
 };
 

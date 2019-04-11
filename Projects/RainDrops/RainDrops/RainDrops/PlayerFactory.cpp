@@ -43,7 +43,7 @@ void PlayerFactory::spawnPlayer(RakNet::BitStream& bitStream)
 				PrefabAsset* prefab = (PrefabAsset*)asset;
 				GameObject* go = prefab->CreatePrefab();
 
-				playerPool[numCurrentPlayer];
+				playerPool[numCurrentPlayer] = go->getUID();
 
 				auto gameObjects = GameObjectManager::Instance().GetAllRootGameObjects();
 				for (auto gObject : gameObjects)
@@ -60,13 +60,11 @@ void PlayerFactory::spawnPlayer(RakNet::BitStream& bitStream)
 						bitStream.Write(InputController::getClassHashCode());
 						bitStream.Write(getHashCode("setPlayerCallback"));
 						bitStream.Write(go->getUID());
-
-						NetworkServer::Instance().callRPC(bitStream);
+						NetworkServer::Instance().callRPC(bitStream, numCurrentPlayer);
 					}
 				}
 
 				numCurrentPlayer++;
-
 			}
 		}
 	}

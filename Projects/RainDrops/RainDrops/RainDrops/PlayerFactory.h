@@ -23,7 +23,7 @@ private:
 	int numCurrentPlayer = 0;
 	bool isSpawned[2] = { false, false };
 	STRCODE playerPrefabID[2];
-	STRCODE playerPool[2];
+	STRCODE playerPool[2] = {0,0};
 
 };
 
