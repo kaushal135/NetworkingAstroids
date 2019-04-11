@@ -24,6 +24,7 @@ public:
 	}
 	
 	bool isServer() { return isserver; }
+	void callRPC(RakNet::BitStream& bitStream, unsigned int index);
 	float getNetworkDelay() { return networkDelay; }
 
 	void sendPacket(RakNet::BitStream& bs);

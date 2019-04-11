@@ -57,6 +57,13 @@ void Player::readCreate(RakNet::BitStream & bs)
 	bs.Read(speed.y);
 }
 
+const STRCODE Player::getShipUID() const
+{
+	return gameObject->getUID();
+}
+
+
+
 void Player::update(float deltaTime)
 {
 	Sprite::update(deltaTime);

@@ -19,9 +19,16 @@ public:
 	const sf::Vector2f& getSpeed() const { return speed; }
 	void setSpeed(const sf::Vector2f& _speed) { speed = _speed; }
 
+	const sf::Vector2f& getMinSpeed() const { return minSpeed; }
+	const sf::Vector2f& getMaXSpeed() const { return maxSpeed; }
+
+	const STRCODE getShipUID() const;
+	
+
 private:
 	sf::Vector2f speed;
 	sf::Vector2f minSpeed;
 	sf::Vector2f maxSpeed;
+
 };
 
