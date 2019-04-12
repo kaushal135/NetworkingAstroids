@@ -19,6 +19,7 @@ public:
     void setSpeed(const sf::Vector2f& _speed) { speed = _speed; }
 
 	const void DecreaseHealth();
+	const STRCODE getRainDropUID() const;
 private:
 	float health = 3;
 	sf::Vector2f speed;
