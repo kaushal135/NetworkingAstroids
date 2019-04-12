@@ -8,14 +8,19 @@ IMPLEMENT_DYNAMIC_CLASS(Laser)
 void Laser::initialize()
 {
 	Sprite::initialize();
-
-	
+	topOfScreen = (RenderSystem::Instance().getView().getSize().y * -1.0f) - 64.0f;
 }
 
 void Laser::update(float deltaTime)
 {
 	Sprite::update(deltaTime);
-	if (gameObject->getTransform()->getPosition().y < -600)
+
+	if (NetworkClient::Instance().isClient() == true)
+	{
+		return;
+	}
+
+	if (gameObject->getTransform()->getPosition().y > topOfScreen)
 	{
 		gameObject->getTransform()->move(speed.x * deltaTime, speed.y * deltaTime);
 	}

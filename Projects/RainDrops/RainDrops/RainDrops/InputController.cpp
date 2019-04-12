@@ -53,7 +53,7 @@ void InputController::update(float deltaTime)
 
 			sf::Vector2f currentSpeed = myShip->getSpeed();
 			if (currentSpeed.x <= myShip->getMaXSpeed().x) {
-				currentSpeed.x += 10;
+				currentSpeed.x += 50;
 			}
 			bitStream.Write(currentSpeed);
 			NetworkClient::Instance().callRPC(bitStream);
@@ -71,7 +71,7 @@ void InputController::update(float deltaTime)
 
 			sf::Vector2f currentSpeed = myShip->getSpeed();
 			if (currentSpeed.x >= myShip->getMinSpeed().x) {
-				currentSpeed.x -= 10;
+				currentSpeed.x -= 50;
 			}
 			bitStream.Write(currentSpeed);
 			NetworkClient::Instance().callRPC(bitStream);
@@ -88,7 +88,7 @@ void InputController::update(float deltaTime)
 
 			sf::Vector2f currentSpeed = myShip->getSpeed();
 			if (currentSpeed.y >= myShip->getMinSpeed().y) {
-				currentSpeed.y -= 10;
+				currentSpeed.y -= 50;
 			}
 			bitStream.Write(currentSpeed);
 			NetworkClient::Instance().callRPC(bitStream);
@@ -106,7 +106,7 @@ void InputController::update(float deltaTime)
 
 			sf::Vector2f currentSpeed = myShip->getSpeed();
 			if (currentSpeed.y <= myShip->getMaXSpeed().y) {
-				currentSpeed.y += 10;
+				currentSpeed.y += 50;
 			}
 			bitStream.Write(currentSpeed);
 			NetworkClient::Instance().callRPC(bitStream);
@@ -114,13 +114,27 @@ void InputController::update(float deltaTime)
 
 		if (InputManager::Instance().keyPressed(sf::Keyboard::Space)) {
 			std::cout << "Shoot" << std::endl;
-			RakNet::BitStream bitStream;
-			bitStream.Write((unsigned char)ID_RPC_MESSAGE);
-			bitStream.Write(gameObject->getUID());
-			bitStream.Write(LaserFactory::getClassHashCode());
-			bitStream.Write(getHashCode("spawnLaser"));
-			NetworkClient::Instance().callRPC(bitStream);
+			
+			auto gameObjects = GameObjectManager::Instance().GetAllRootGameObjects();
+			for (auto gObject : gameObjects)
+			{
+				LaserFactory* laserFact = dynamic_cast<LaserFactory*>(
+					gObject->GetComponentByUUID(LaserFactory::getClassHashCode()));
 
+				if (laserFact != nullptr)
+				{
+
+					RakNet::BitStream bitStream;
+					bitStream.Write((unsigned char)ID_RPC_MESSAGE);
+					bitStream.Write(gObject->getUID());
+					bitStream.Write(LaserFactory::getClassHashCode());
+					bitStream.Write(getHashCode("spawnLaser"));
+					sf::Vector2f playerPos = myShip->getPosition();
+					bitStream.Write(playerPos.x);
+					bitStream.Write(playerPos.y);
+					NetworkClient::Instance().callRPC(bitStream);
+				}
+			}
 
 		}
 	}

@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<GameObject uuid="eebe689a-61ad-42af-94ae-8185b5555d45" name="Laser">
+<GameObject uuid="06cc5b76-1fd9-49df-9fa2-5c62317c0886" name="Laser">
 	<Components>
 		<Component class="Transform">
 			<Position x="0" y="0"/>
@@ -7,7 +7,7 @@
 			<Scale x="1" y="1"/>
 		</Component>
 		<Component class="Laser">
-			<TextureUID uuid="346d0a29-0588-4837-92bd-fd08f65fedb7" />
+			<TextureUID uuid="8fd4199c-3ab5-4021-9f48-c8362ee0a547" />
 			<MaxSpeed x="0" y="100"/>
 		</Component>
 	</Components>

@@ -6,8 +6,8 @@
 #include "InputController.h"
 #include "PlayerFactory.h"
 #include "Player.h"
-#include "Laser.h"
 #include "LaserFactory.h"
+#include "Laser.h"
 
 int main()
 {
@@ -17,8 +17,8 @@ int main()
     REGISTER_DYNAMIC_CLASS(InputController);
 	REGISTER_DYNAMIC_CLASS(PlayerFactory);
 	REGISTER_DYNAMIC_CLASS(Player);
-	REGISTER_DYNAMIC_CLASS(Laser);
 	REGISTER_DYNAMIC_CLASS(LaserFactory);
+	REGISTER_DYNAMIC_CLASS(Laser);
 	
 	GameEngine::Instance().initialize();
 

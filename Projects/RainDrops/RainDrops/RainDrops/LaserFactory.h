@@ -1,11 +1,15 @@
 #pragma once
 
 #include "Component.h"
-#include <SFML/System.hpp>
 
-class LaserFactory: public Component
+class LaserFactory : public Component
 {
-	DECLARE_DYNAMIC_DERIVED_CLASS(LaserFactory, Component);
+	DECLARE_DYNAMIC_DERIVED_CLASS(LaserFactory, Component)
+
+	enum NetworkPackets
+	{
+		SPAWN
+	};
 
 public:
 	void initialize() override;
@@ -13,6 +17,7 @@ public:
 	virtual void load(XMLElement* element);
 
 	void spawnLaser(RakNet::BitStream& bitStream);
+
 private:
 	STRCODE prefabID;
 };

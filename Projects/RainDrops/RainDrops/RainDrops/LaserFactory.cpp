@@ -1,22 +1,29 @@
 #include "GameCore.h"
 #include "LaserFactory.h"
 #include "PrefabAsset.h"
+#include "AssetManager.h"
+#include "InputManager.h"
+#include "Transform.h"
 #include "Laser.h";
 
-using namespace std::placeholders;
 IMPLEMENT_DYNAMIC_CLASS(LaserFactory);
+
+using namespace std::placeholders;
 
 void LaserFactory::initialize()
 {
 	Component::initialize();
 	registerRPC(getHashCode("spawnLaser"), std::bind(&LaserFactory::spawnLaser, this, _1));
-
-
 }
 
 void LaserFactory::update(float deltaTime)
 {
 	Component::update(deltaTime);
+
+	if (NetworkClient::Instance().isClient() == true)
+	{
+		return;
+	}
 
 }
 
@@ -32,14 +39,17 @@ void LaserFactory::load(XMLElement * element)
 
 void LaserFactory::spawnLaser(RakNet::BitStream & bitStream)
 {
+	sf::Vector2f playerPos;
+	bitStream.Read(playerPos.x);
+	bitStream.Read(playerPos.y);
+
 	if (NetworkServer::Instance().isServer()) {
 		Asset* asset = AssetManager::Instance().getAsset(prefabID);
 		if (asset != nullptr)
 		{
 			PrefabAsset* prefab = (PrefabAsset*)asset;
 			GameObject* go = prefab->CreatePrefab();
-			Laser* laser = (Laser*)go;
-			laser->setSpeed(sf::Vector2f(0, 65));
+			go->getTransform()->setPosition(playerPos);
 		}
 	}
 }

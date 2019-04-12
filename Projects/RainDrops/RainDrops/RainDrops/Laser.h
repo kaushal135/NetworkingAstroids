@@ -17,6 +17,7 @@ public:
 	void setSpeed(const sf::Vector2f& _speed) { speed = _speed; }
 private:
 	sf::Vector2f speed;
+	float topOfScreen;
 
 
 };

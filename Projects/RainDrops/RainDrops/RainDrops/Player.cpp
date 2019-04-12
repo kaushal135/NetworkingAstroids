@@ -60,6 +60,11 @@ void Player::readCreate(RakNet::BitStream & bs)
 	bs.Read(speed.y);
 }
 
+const sf::Vector2f & Player::getPosition() const
+{
+	return gameObject->getTransform()->getPosition();
+}
+
 const STRCODE Player::getShipUID() const
 {
 	return gameObject->getUID();

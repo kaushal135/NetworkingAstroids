@@ -18,6 +18,7 @@ void RainDrop::initialize()
         pos.x = RenderSystem::Instance().getView().getSize().x * Random.Random();
         pos.y = (RenderSystem::Instance().getView().getSize().y * -1.0f) - 64.0f;
         gameObject->getTransform()->setPosition(pos);
+		
     }
 	registerRPC(getHashCode("decreaseHealth"), std::bind(&RainDrop::DecreaseHealth, this));
 }

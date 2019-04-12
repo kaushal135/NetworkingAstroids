@@ -22,6 +22,8 @@ public:
 	const sf::Vector2f& getMinSpeed() const { return minSpeed; }
 	const sf::Vector2f& getMaXSpeed() const { return maxSpeed; }
 
+	const sf::Vector2f&getPosition() const;
+
 	const STRCODE getShipUID() const;
 	
 	const void DestroyPlayer();
