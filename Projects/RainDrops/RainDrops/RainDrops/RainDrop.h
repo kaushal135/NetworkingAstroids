@@ -18,7 +18,9 @@ public:
     const sf::Vector2f& getSpeed() const { return speed; }
     void setSpeed(const sf::Vector2f& _speed) { speed = _speed; }
 
+	const void DecreaseHealth();
 private:
+	float health = 3;
 	sf::Vector2f speed;
 	sf::Vector2f minSpeed;
 	sf::Vector2f maxSpeed;
