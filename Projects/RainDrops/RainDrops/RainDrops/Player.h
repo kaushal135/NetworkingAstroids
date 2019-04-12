@@ -24,6 +24,9 @@ public:
 
 	const STRCODE getShipUID() const;
 	
+	const void DestroyPlayer();
+
+	void checkCollisionWithAsteroids();
 
 private:
 	sf::Vector2f speed;
