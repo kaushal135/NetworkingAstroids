@@ -1,8 +1,9 @@
 #include "GameCore.h"
 #include "InputController.h"
 #include "RainDrop.h"
+#include "LaserFactory.h"
 
-IMPLEMENT_DYNAMIC_CLASS(InputController)
+ IMPLEMENT_DYNAMIC_CLASS(InputController)
 
 using namespace std::placeholders;
 
@@ -113,6 +114,14 @@ void InputController::update(float deltaTime)
 
 		if (InputManager::Instance().keyPressed(sf::Keyboard::Space)) {
 			std::cout << "Shoot" << std::endl;
+			RakNet::BitStream bitStream;
+			bitStream.Write((unsigned char)ID_RPC_MESSAGE);
+			bitStream.Write(gameObject->getUID());
+			bitStream.Write(LaserFactory::getClassHashCode());
+			bitStream.Write(getHashCode("spawnLaser"));
+			NetworkClient::Instance().callRPC(bitStream);
+
+
 		}
 	}
 

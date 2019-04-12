@@ -82,12 +82,7 @@ void Player::checkCollisionWithAsteroids()
 		{
 			if (rainDrop->isWithinBounds(gameObject->getTransform()->getPosition().x, gameObject->getTransform()->getPosition().y))
 			{
-				RakNet::BitStream bitStream;
-				bitStream.Write((unsigned char)ID_RPC_MESSAGE);
-				bitStream.Write(gameObject->getUID());
-				bitStream.Write(Player::getClassHashCode());
-				bitStream.Write(getHashCode("destroyPlayer"));
-				NetworkClient::Instance().callRPC(bitStream);
+				DestroyPlayer();
 			}
 		}
 		
@@ -99,16 +94,12 @@ void Player::checkCollisionWithAsteroids()
 void Player::update(float deltaTime)
 {
 	Sprite::update(deltaTime);
-
-	if (gameObject->getTransform()->getPosition().y < 50)
+	gameObject->getTransform()->move(speed.x * deltaTime, speed.y * deltaTime);
+	if (NetworkServer::Instance().isServer())
 	{
-		gameObject->getTransform()->move(speed.x * deltaTime, speed.y * deltaTime);
+		checkCollisionWithAsteroids();
 	}
-	else
-	{
-		GameObjectManager::Instance().DestroyGameObject(gameObject);
-	}
-	checkCollisionWithAsteroids();
+	
 
 }
 
