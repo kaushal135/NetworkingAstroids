@@ -2,4 +2,4 @@
 
 <ipaddress>127.0.0.1</ipaddress>
 <port>1234</port>
-<networkDelay> 0.5f </networkDelay>
+<networkDelay> 0.0f </networkDelay>
