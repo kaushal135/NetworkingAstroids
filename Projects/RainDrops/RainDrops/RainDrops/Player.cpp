@@ -2,8 +2,10 @@
 #include "Player.h"
 #include "PrefabAsset.h"
 #include "Transform.h"
+#include "RainDrop.h"
 
 IMPLEMENT_DYNAMIC_CLASS(Player)
+using namespace std::placeholders;
 
 void Player::initialize()
 {
@@ -14,6 +16,7 @@ void Player::initialize()
 		speed.x = minSpeed.x;
 		speed.y = minSpeed.y;
 	}
+	registerRPC(getHashCode("destroyPlayer"), std::bind(&Player::DestroyPlayer, this));
 }
 
 void Player::load(XMLElement* element)
@@ -62,6 +65,35 @@ const STRCODE Player::getShipUID() const
 	return gameObject->getUID();
 }
 
+const void Player::DestroyPlayer()
+{
+	GameObjectManager::Instance().DestroyGameObject(gameObject);
+}
+
+void Player::checkCollisionWithAsteroids()
+{
+	auto gameObjects = GameObjectManager::Instance().GetAllRootGameObjects();
+	for (auto go : gameObjects)
+	{
+		RainDrop* rainDrop = dynamic_cast<RainDrop*>(
+			go->GetComponentByUUID(RainDrop::getClassHashCode()));
+		
+		if (rainDrop != nullptr)
+		{
+			if (rainDrop->isWithinBounds(gameObject->getTransform()->getPosition().x, gameObject->getTransform()->getPosition().y))
+			{
+				RakNet::BitStream bitStream;
+				bitStream.Write((unsigned char)ID_RPC_MESSAGE);
+				bitStream.Write(gameObject->getUID());
+				bitStream.Write(Player::getClassHashCode());
+				bitStream.Write(getHashCode("destroyPlayer"));
+				NetworkClient::Instance().callRPC(bitStream);
+			}
+		}
+		
+	}
+}
+
 
 
 void Player::update(float deltaTime)
@@ -76,8 +108,7 @@ void Player::update(float deltaTime)
 	{
 		GameObjectManager::Instance().DestroyGameObject(gameObject);
 	}
-
-
+	checkCollisionWithAsteroids();
 
 }
 
