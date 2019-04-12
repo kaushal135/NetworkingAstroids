@@ -19,6 +19,7 @@ void RainDrop::initialize()
         pos.y = (RenderSystem::Instance().getView().getSize().y * -1.0f) - 64.0f;
         gameObject->getTransform()->setPosition(pos);
     }
+	registerRPC(getHashCode("decreaseHealth"), std::bind(&RainDrop::DecreaseHealth, this));
 }
 
 void RainDrop::load(XMLElement* element)
@@ -75,4 +76,16 @@ void RainDrop::update(float deltaTime)
 		
         GameObjectManager::Instance().DestroyGameObject(gameObject);
     }
+}
+
+const void RainDrop::DecreaseHealth()
+{
+	if (health > 0)
+	{
+		health -= 1;
+	}
+	else
+	{
+		GameObjectManager::Instance().DestroyGameObject(gameObject);
+	}
 }
