@@ -78,7 +78,7 @@
 	<GameObject uuid="9f3e9147-56ea-4036-aeb4-a0ac6dc73be6" name="LaserFactory">
 		<Components>
 			<Component class="LaserFactory">
-				<PrefabAsset>98c6e649-0fd1-4b0f-969a-d279740741bb</PrefabAsset>
+				<PrefabAsset>35de7f45-c112-476e-b681-d03b66a10ae0</PrefabAsset>
 			</Component>
 		</Components>
 	</GameObject>
