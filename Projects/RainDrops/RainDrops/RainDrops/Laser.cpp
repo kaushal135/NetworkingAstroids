@@ -28,6 +28,10 @@ void Laser::update(float deltaTime)
 void Laser::load(XMLElement * element)
 {
 	Sprite::load(element);
+
+	XMLElement* maxElement = element->FirstChildElement("MaxSpeed");
+	THROW_RUNTIME_ERROR(maxElement == nullptr, "No Max Element");
+	speed = sf::Vector2f(maxElement->FloatAttribute("x"), maxElement->FloatAttribute("y"));
 }
 
 void Laser::writeCreate(RakNet::BitStream & bs) const

@@ -8,7 +8,6 @@
 		</Component>
 		<Component class="Laser">
 			<TextureUID uuid="346d0a29-0588-4837-92bd-fd08f65fedb7" />
-			<MinSpeed x="0" y="20"/>
 			<MaxSpeed x="0" y="100"/>
 		</Component>
 	</Components>

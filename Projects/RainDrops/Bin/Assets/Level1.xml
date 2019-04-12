@@ -16,12 +16,14 @@
 	<Asset>Assets/meteorBrown_small2.png</Asset>
 	<Asset>Assets/meteorBrown_tiny1.png</Asset>
 	<Asset>Assets/meteorBrown_tiny2.png</Asset>
+	<Asset>Assets/Laser.png</Asset>
 	
 	<!-- Prefab Example!! -->	
 	<Asset>Assets/RaindropPrefab.xml</Asset>
 	<Asset>Assets/playerPrefab.xml</Asset>
 	<Asset>Assets/player2Prefab.xml</Asset>
 	<Asset>Assets/MeteorPrefab.xml</Asset>
+	<Asset>Assets/LaserPrefab.xml</Asset>
 
 	<!--<Asset>Assets/playerPrefab.xml<Asset> -->
 </Assets>
@@ -69,6 +71,14 @@
 			<Component class="RainDropFactory">
 				<PrefabAsset>98c6e649-0fd1-4b0f-969a-d279740741bb</PrefabAsset>
 				<SpawnDelay value="1" />
+			</Component>
+		</Components>
+	</GameObject>
+	
+	<GameObject uuid="9f3e9147-56ea-4036-aeb4-a0ac6dc73be6" name="LaserFactory">
+		<Components>
+			<Component class="LaserFactory">
+				<PrefabAsset>98c6e649-0fd1-4b0f-969a-d279740741bb</PrefabAsset>
 			</Component>
 		</Components>
 	</GameObject>
