@@ -85,8 +85,9 @@ const void RainDrop::DecreaseHealth()
 	{
 		health -= 1;
 	}
-	else
-	{
-		GameObjectManager::Instance().DestroyGameObject(gameObject);
-	}
-}
+}
+
+const STRCODE RainDrop::getRainDropUID() const
+{
+	return gameObject->getUID();
+}
