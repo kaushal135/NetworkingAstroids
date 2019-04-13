@@ -2,6 +2,7 @@
 #include "Laser.h"
 #include "PrefabAsset.h"
 #include "Transform.h"
+#include "RainDrop.h"
 
 IMPLEMENT_DYNAMIC_CLASS(Laser)
 
@@ -28,6 +29,11 @@ void Laser::update(float deltaTime)
 	{
 		GameObjectManager::Instance().DestroyGameObject(gameObject);
 	}
+
+	if (NetworkServer::Instance().isServer())
+	{
+		checkCollisionWithAsteroids();
+	}
 }
 
 void Laser::load(XMLElement * element)
@@ -51,4 +57,25 @@ void Laser::readCreate(RakNet::BitStream & bs)
 	Sprite::readCreate(bs);
 	bs.Read(speed.x);
 	bs.Read(speed.y);
+}
+
+void Laser::checkCollisionWithAsteroids()
+{
+	auto gameObjects = GameObjectManager::Instance().GetAllRootGameObjects();
+	for (auto go : gameObjects)
+	{
+		RainDrop* rainDrop = dynamic_cast<RainDrop*>(
+			go->GetComponentByUUID(RainDrop::getClassHashCode()));
+
+		if (rainDrop != nullptr)
+		{
+			if (rainDrop->isWithinBounds(gameObject->getTransform()->getPosition().x, gameObject->getTransform()->getPosition().y))
+			{
+				rainDrop->DecreaseHealth();
+				GameObjectManager::Instance().DestroyGameObject(gameObject);
+				break;
+			}
+		}
+
+	}
 }

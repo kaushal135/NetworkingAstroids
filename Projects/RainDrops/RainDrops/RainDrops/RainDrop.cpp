@@ -20,7 +20,7 @@ void RainDrop::initialize()
         gameObject->getTransform()->setPosition(pos);
 		
     }
-	registerRPC(getHashCode("decreaseHealth"), std::bind(&RainDrop::DecreaseHealth, this));
+	
 }
 
 void RainDrop::load(XMLElement* element)

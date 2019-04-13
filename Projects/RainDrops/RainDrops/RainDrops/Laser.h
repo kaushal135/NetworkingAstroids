@@ -15,6 +15,8 @@ public:
 
 	const sf::Vector2f& getSpeed() const { return speed; }
 	void setSpeed(const sf::Vector2f& _speed) { speed = _speed; }
+
+	void checkCollisionWithAsteroids();
 private:
 	sf::Vector2f speed;
 	float topOfScreen;
