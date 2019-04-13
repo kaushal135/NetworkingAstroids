@@ -1,0 +1,8 @@
+// Hint files help the Visual Studio IDE interpret Visual C++ identifiers
+// such as names of functions and macros.
+// For more information see https://go.microsoft.com/fwlink/?linkid=865984
+#define DECLARE_DYNAMIC_DERIVED_CLASS(name, base) public: DECLARE_CLASS_DEFINITION(name) DECLARE_CREATE_CLASS(name) IS_A_DEFINITION(name, base)
+// Hint files help the Visual Studio IDE interpret Visual C++ identifiers
+// such as names of functions and macros.
+// For more information see https://go.microsoft.com/fwlink/?linkid=865984
+#define DECLARE_DYNAMIC_DERIVED_CLASS(name, base) public: DECLARE_CLASS_DEFINITION(name) DECLARE_CREATE_CLASS(name) IS_A_DEFINITION(name, base)

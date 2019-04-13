@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<GameObject uuid="06cc5b76-1fd9-49df-9fa2-5c62317c0886" name="Laser">
+	<Components>
+		<Component class="Transform">
+			<Position x="0" y="0"/>
+			<Rotation a="0"/>
+			<Scale x="1" y="1"/>
+		</Component>
+		<Component class="Laser">
+			<TextureUID uuid="8fd4199c-3ab5-4021-9f48-c8362ee0a547" />
+			<MaxSpeed x="0" y="-100"/>
+		</Component>
+	</Components>
+</GameObject>
