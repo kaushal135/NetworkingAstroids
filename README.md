@@ -1,7 +1,7 @@
 # NetworkingAstroids
 
 a simple multiplayer astroids game created in a custom c++ networking engine.
-The engine utalizes SFML and raknet libraries for rengering and networking respectively. 
+The engine utalizes SFML and raknet libraries for rendering and networking respectively. 
 
 Features:
   - astroids with random position and velocity
